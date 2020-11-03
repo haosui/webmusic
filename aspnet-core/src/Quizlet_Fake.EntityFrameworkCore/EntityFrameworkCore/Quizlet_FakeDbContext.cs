@@ -1,10 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Quizlet_Fake.Users;
+
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.Identity;
 using Volo.Abp.Users.EntityFrameworkCore;
+using Quizlet_Fake.Albums;
+using Quizlet_Fake.AuthorSingers;
+using Quizlet_Fake.Playlists;
+using Quizlet_Fake.Reports;
+using Quizlet_Fake.Songs;
+using Quizlet_Fake.Tags;
 
 namespace Quizlet_Fake.EntityFrameworkCore
 {
@@ -21,6 +28,28 @@ namespace Quizlet_Fake.EntityFrameworkCore
     public class Quizlet_FakeDbContext : AbpDbContext<Quizlet_FakeDbContext>
     {
         public DbSet<AppUser> Users { get; set; }
+        public DbSet<Album> Album { get; set; }
+
+        public DbSet<Author> Author { get; set; }
+
+        public DbSet<Singer> Singer { get; set; }
+
+        public DbSet<SongbySinger> SongBySinger { get; set; }
+
+        public DbSet<Playlist> Playlist { get; set; }
+
+        public DbSet<Include> Include { get; set; }
+
+        public DbSet<Report> Report { get; set; }
+
+        public DbSet<Lyric> Lyric { get; set; }
+
+        public DbSet<Song> Song { get; set; }
+        public DbSet<SongTag> SongTag { get; set; }
+
+        public DbSet<Tag> Tag { get; set; }
+
+
 
         /* Add DbSet properties for your Aggregate Roots / Entities here.
          * Also map them inside Quizlet_FakeDbContextModelCreatingExtensions.ConfigureQuizlet_Fake

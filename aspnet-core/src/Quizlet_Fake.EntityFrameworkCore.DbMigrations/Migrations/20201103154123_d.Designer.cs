@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quizlet_Fake.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -10,9 +11,10 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Quizlet_Fake.Migrations
 {
     [DbContext(typeof(Quizlet_FakeMigrationsDbContext))]
-    partial class Quizlet_FakeMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201103154123_d")]
+    partial class d
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,10 +207,6 @@ namespace Quizlet_Fake.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("singer_id");
-
-                    b.HasIndex("song_id");
-
                     b.ToTable("AppSongbySingers");
                 });
 
@@ -251,10 +249,6 @@ namespace Quizlet_Fake.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("playlist_id");
-
-                    b.HasIndex("song_id");
 
                     b.ToTable("AppIncludes");
                 });
@@ -351,8 +345,6 @@ namespace Quizlet_Fake.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("song_id");
-
                     b.ToTable("AppReports");
                 });
 
@@ -395,8 +387,6 @@ namespace Quizlet_Fake.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("song_id");
 
                     b.ToTable("AppLyrics");
                 });
@@ -454,6 +444,9 @@ namespace Quizlet_Fake.Migrations
                     b.Property<int>("reviewamount")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("singer_id")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("songpath")
                         .HasColumnType("nvarchar(max)");
 
@@ -461,10 +454,6 @@ namespace Quizlet_Fake.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("album_id");
-
-                    b.HasIndex("author_id");
 
                     b.ToTable("AppSongs");
                 });
@@ -508,10 +497,6 @@ namespace Quizlet_Fake.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("song_id");
-
-                    b.HasIndex("tag_id");
 
                     b.ToTable("AppSongTags");
                 });
@@ -2310,84 +2295,6 @@ namespace Quizlet_Fake.Migrations
                     b.HasKey("TenantId", "Name");
 
                     b.ToTable("AbpTenantConnectionStrings");
-                });
-
-            modelBuilder.Entity("Quizlet_Fake.AuthorSingers.SongbySinger", b =>
-                {
-                    b.HasOne("Quizlet_Fake.AuthorSingers.Singer", null)
-                        .WithMany()
-                        .HasForeignKey("singer_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Quizlet_Fake.Songs.Song", null)
-                        .WithMany()
-                        .HasForeignKey("song_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Quizlet_Fake.Playlists.Include", b =>
-                {
-                    b.HasOne("Quizlet_Fake.Playlists.Playlist", null)
-                        .WithMany()
-                        .HasForeignKey("playlist_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Quizlet_Fake.Songs.Song", null)
-                        .WithMany()
-                        .HasForeignKey("song_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Quizlet_Fake.Reports.Report", b =>
-                {
-                    b.HasOne("Quizlet_Fake.Songs.Song", null)
-                        .WithMany()
-                        .HasForeignKey("song_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Quizlet_Fake.Songs.Lyric", b =>
-                {
-                    b.HasOne("Quizlet_Fake.Songs.Song", null)
-                        .WithMany()
-                        .HasForeignKey("song_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Quizlet_Fake.Songs.Song", b =>
-                {
-                    b.HasOne("Quizlet_Fake.Albums.Album", null)
-                        .WithMany()
-                        .HasForeignKey("album_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Quizlet_Fake.AuthorSingers.Author", null)
-                        .WithMany()
-                        .HasForeignKey("author_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Quizlet_Fake.Tags.SongTag", b =>
-                {
-                    b.HasOne("Quizlet_Fake.Songs.Song", null)
-                        .WithMany()
-                        .HasForeignKey("song_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Quizlet_Fake.Tags.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("tag_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
