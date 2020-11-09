@@ -18,7 +18,8 @@ namespace Quizlet_Fake.AuthorSingers
             : base(repository)
         {
 
+            this._repository = repository;
         }
-
+        private readonly IRepository<Author, Guid> _repository;
     }
 }

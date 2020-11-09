@@ -15,6 +15,11 @@ function configureRoutes(routes: RoutesService) {
         order: 1,
         layout: eLayoutType.application,
       },
+      {
+        path: '/songs',
+        name: 'Songs',
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }

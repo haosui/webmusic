@@ -197,11 +197,17 @@ namespace Quizlet_Fake.Migrations
                         .HasColumnName("LastModifierId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("imgpaht")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("singer_id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("song_id")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("songpath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -439,10 +445,10 @@ namespace Quizlet_Fake.Migrations
                     b.Property<Guid>("author_id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("name")
+                    b.Property<string>("imagepath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("namepath")
+                    b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("publishdate")
@@ -453,6 +459,9 @@ namespace Quizlet_Fake.Migrations
 
                     b.Property<int>("reviewamount")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("singer_id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("songpath")
                         .HasColumnType("nvarchar(max)");

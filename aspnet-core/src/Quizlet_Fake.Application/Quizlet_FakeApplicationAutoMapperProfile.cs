@@ -35,7 +35,12 @@ namespace Quizlet_Fake
             CreateMap<CreateUpdateTagDto, Tag>();
             CreateMap<SongTag, SongTagDto>();
             CreateMap<CreateUpdateSongTagDto, SongTag>();
-           
+
+            CreateMap<SongbySinger, SongbySingerDto>();
+            CreateMap<CreateUpdateSongbySingerDto, SongbySinger>();
+
+            CreateMap<Include, IncludeDto>();
+            CreateMap<CreateUpdateIncludeDto, Include>();
 
         }
     }

@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Quizlet_Fake.Domain\Quizlet_Fake.Domain.csproj" />
     <ProjectReference Include="..\Quizlet_Fake.Application.Contracts\Quizlet_Fake.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Quizlet_Fake.EntityFrameworkCore\Quizlet_Fake.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>

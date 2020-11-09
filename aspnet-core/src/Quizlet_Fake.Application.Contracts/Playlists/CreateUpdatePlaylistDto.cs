@@ -6,7 +6,7 @@ namespace Quizlet_Fake.Playlists
 {
     public class CreateUpdatePlaylistDto
     {
-      //  public Guid user_id { get; set; }
+        public Guid user_id { get; set; }
         public string name { get; set; }
     }
 }

@@ -18,7 +18,9 @@ namespace Quizlet_Fake.Reports
             : base(repository)
         {
 
+            this._repository = repository;
         }
+        private readonly IRepository<Report, Guid> _repository;
 
 
 

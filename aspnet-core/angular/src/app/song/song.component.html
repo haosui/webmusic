@@ -1,0 +1,36 @@
+
+
+ <div id="search">
+    <input #textbox type="text" class="textbox" placeholder="Tìm kiếm theo tên" (keyup.enter)="ssearch(textbox.value)" >
+    <input placeholder="Tìm kiếm theo tên" title="Tìm kiếm theo tên" type="submit" class="button" >
+   
+  </div>
+
+<mat-grid-list cols="2" rowHeight="2:1">
+    <mat-card *ngFor="let item of songs">
+        <span class="course_name">{{item.name}}</span>
+        <span class="course_name">- {{item.singername}}</span>
+        <mat-card-actions>
+            <button mat-button (click)="Playy(item)" >Play</button>
+            
+        </mat-card-actions>
+    </mat-card>
+</mat-grid-list>
+
+
+
+
+
+<div class = "footer" style="background: white;"> 
+
+    <div style="width:800px; margin:0 auto;" >{{info}}</div>
+    <div style="width:800px; margin:0 auto;">
+        
+        <img style= "height: 80px;" [src]="imgsrc">
+
+     <audio controls id="playaudio">
+        <source  [src]="musicsrc" type="audio/ogg">
+        
+      </audio>
+    </div>
+</div>

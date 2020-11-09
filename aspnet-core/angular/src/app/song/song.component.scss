@@ -1,0 +1,30 @@
+  
+mat-card{
+    margin: 10px 10px 10px 10px;
+    border-radius: 10px;
+    width: 90%;
+    height: 90%;
+    position: relative;
+    cursor: pointer;
+}
+mat-card:hover{
+    background-color: #e1fcfa;
+}
+.course_name {
+    text-align: center;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1.2;
+    color: #caca1c;
+}
+.course_name:hover{
+    color: #f5e000;
+}
+.footer{
+    height: 100px;
+    width: 100%;
+    background-color: black;
+    position: fixed;
+    bottom: 0px;
+  }
+  

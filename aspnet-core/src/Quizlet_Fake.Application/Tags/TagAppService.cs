@@ -19,7 +19,9 @@ namespace Quizlet_Fake.Tags
             : base(repository)
     {
 
+            this._repository = repository;
+        }
+        private readonly IRepository<Tag, Guid> _repository;
     }
-}
     
 }

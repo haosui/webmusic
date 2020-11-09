@@ -12,13 +12,13 @@ namespace Quizlet_Fake.Songs
         public Guid author_id { get; set; }
         public Guid album_id { get; set; }
 
-        //public Guid singer_id { get; set; }
+        public Guid singer_id { get; set; }
 
 
 
         public DateTime publishdate { get; set; }
         public string songpath { get; set; }
-        public string namepath { get; set; }
+        public string imagepath { get; set; }
 
         public string rating { get; set; }
 

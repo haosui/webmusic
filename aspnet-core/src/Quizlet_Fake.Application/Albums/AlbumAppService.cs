@@ -19,7 +19,10 @@ namespace Quizlet_Fake.Albums
             : base(repository)
         {
 
+
+            this._repository = repository;
         }
+        private readonly IRepository<Album, Guid> _repository;
     }
 }
     

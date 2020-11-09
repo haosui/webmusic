@@ -20,7 +20,9 @@ namespace Quizlet_Fake.Songs
             : base(repository)
         {
 
+            this._repository = repository;
         }
+        private readonly IRepository<Lyric, Guid> _repository;
     }
     
 }

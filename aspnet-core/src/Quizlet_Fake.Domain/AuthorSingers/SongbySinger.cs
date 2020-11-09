@@ -9,6 +9,8 @@ namespace Quizlet_Fake.AuthorSingers
     {
         public Guid song_id { get; set; }
         public Guid singer_id { get; set; }
+        public string songpath { get; set; }
+        public string imgpaht { get; set; }
 
     }
 }
