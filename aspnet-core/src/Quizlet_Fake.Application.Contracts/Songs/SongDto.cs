@@ -16,5 +16,7 @@ namespace Quizlet_Fake.Songs
         public Guid singer_id { get; set; }
         public string imagepath { get; set; }
         public string songpath { get; set; }
+
+        public int views { get; set; }
     }
 }

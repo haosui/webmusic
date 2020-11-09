@@ -80,11 +80,11 @@ export class SongService {
     },
     { apiName: this.apiName });
 
-  songListBySingerBySingerrAndLimitfrom = (singerr: string, limitfrom: number) =>
+  songListBySingerByTextAndLimitfrom = (text: string, limitfrom: number) =>
     this.restService.request<any, SongDto[]>({
       method: 'POST',
       url: `/api/app/song/songListBySinger`,
-      params: { singerr: singerr, limitfrom: limitfrom },
+      params: { text: text, limitfrom: limitfrom },
     },
     { apiName: this.apiName });
 
@@ -101,6 +101,14 @@ export class SongService {
       method: 'PUT',
       url: `/api/app/song/${id}`,
       body: input,
+    },
+    { apiName: this.apiName });
+
+  chartByLimitfrom = (limitfrom: number) =>
+    this.restService.request<any, SongDto[]>({
+      method: 'POST',
+      url: `/api/app/song/chart`,
+      params: { limitfrom: limitfrom },
     },
     { apiName: this.apiName });
 

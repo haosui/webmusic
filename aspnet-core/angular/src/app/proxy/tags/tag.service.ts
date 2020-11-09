@@ -47,5 +47,12 @@ export class TagService {
     },
     { apiName: this.apiName });
 
+  getlisttag = () =>
+    this.restService.request<any, TagDto[]>({
+      method: 'GET',
+      url: `/api/app/tag/getlisttag`,
+    },
+    { apiName: this.apiName });
+
   constructor(private restService: RestService) {}
 }

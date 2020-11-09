@@ -128,11 +128,12 @@ namespace Quizlet_Fake.Songs
 
             var query =
                         from songtag in _songtag
+                        
                         join song in _repository on songtag.song_id equals song.Id
-                        join songsinger in _songsinger on song.Id equals songsinger.song_id
-                        join singer in _singer on songsinger.singer_id equals singer.Id
-                        where songtag.Id == tagg
-                        select new { song, singer };
+                        join author in _author on song.author_id equals author.Id
+                        join singer in _singer on song.singer_id equals singer.Id
+                        where songtag.tag_id == tagg
+                        select new { song, singer, author ,songtag};
 
             query = query.Skip(limitfrom).Take(10);
             var queryResult = await AsyncExecuter.ToListAsync(query);
@@ -141,17 +142,19 @@ namespace Quizlet_Fake.Songs
             var DTos = queryResult.Select(x =>
             {
                 var dto = ObjectMapper.Map<Song, SongDto>(x.song);
-
+                dto.authorname = x.author.name;
                 dto.singername = x.singer.name;
+                dto.views = x.song.views;
+
                 return dto;
             }).ToList();
 
 
             return new List<SongDto>(DTos);
         }
+        
 
-
-        public async Task<List<SongDto>> SongListBySinger(string singerr, int limitfrom)
+        public async Task<List<SongDto>> SongListBySinger(string text, int limitfrom)
         {
             await CheckGetListPolicyAsync();
             /*
@@ -162,12 +165,12 @@ namespace Quizlet_Fake.Songs
                         select new { song, singer };
             */
 
-            var query = from singer in _singer
-                         join songsinger in _songsinger on singer.Id equals songsinger.singer_id
-                         join song in _repository on songsinger.song_id equals song.Id
-                         where singer.name.StartsWith(singerr)
-                         select new { song, singer };
-
+            
+            var query = from song in _repository
+                        join author in _author on song.author_id equals author.Id
+                        join singerr in _singer on song.singer_id equals singerr.Id
+                        where singerr.name.StartsWith(text)
+                        select new { song, author, singerr };
             query = query.Skip(limitfrom).Take(10);
             var queryResult = await AsyncExecuter.ToListAsync(query);
 
@@ -175,8 +178,9 @@ namespace Quizlet_Fake.Songs
             var DTos = queryResult.Select(x =>
             {
                 var dto = ObjectMapper.Map<Song, SongDto>(x.song);
-
-                dto.singername = x.singer.name;
+                dto.authorname = x.author.name;
+                dto.singername = x.singerr.name;
+                dto.views = x.song.views;
                 return dto;
             }).ToList();
 
@@ -188,9 +192,9 @@ namespace Quizlet_Fake.Songs
             await CheckGetListPolicyAsync();
             var query = from song in _repository
                         join author in _author on song.author_id equals author.Id
-                        
+                        join singerr in _singer on song.singer_id equals singerr.Id
                         where author.name.StartsWith(authot)
-                        select new { song,author};
+                        select new { song,author,singerr};
             query = query.Skip(limitfrom).Take(10);
             var queryResult = await AsyncExecuter.ToListAsync(query);
 
@@ -198,8 +202,9 @@ namespace Quizlet_Fake.Songs
             var DTos = queryResult.Select(x =>
             {
                 var dto = ObjectMapper.Map<Song, SongDto>(x.song);
-                
+                dto.singername = x.singerr.name;
                 dto.authorname = x.author.name;
+                dto.views = x.song.views;
                 return dto;
             }).ToList();
 
@@ -220,8 +225,9 @@ namespace Quizlet_Fake.Songs
             var query = from singer in _singer
 
                         join song in _repository on singer.Id equals song.singer_id
+                        join author in _author on song.author_id equals author.Id
                         where song.name.StartsWith(key)
-                        select new { song, singer };
+                        select new { song, singer,author };
 
             query = query.Skip(limitfrom).Take(10);
             var queryResult = await AsyncExecuter.ToListAsync(query);
@@ -230,8 +236,9 @@ namespace Quizlet_Fake.Songs
             var DTos = queryResult.Select(x =>
             {
                 var dto = ObjectMapper.Map<Song, SongDto>(x.song);
-
+                dto.authorname = x.author.name;
                 dto.singername = x.singer.name;
+                dto.views = x.song.views;
                 return dto;
             }).ToList();
 
@@ -252,8 +259,8 @@ namespace Quizlet_Fake.Songs
             var query = from singer in _singer
                         
                         join song in _repository on singer.Id equals song.singer_id
-                        
-                        select new { song, singer };
+                        join author in _author on song.author_id equals author.Id
+                        select new { song, singer,author };
 
             query = query.Skip(limitfrom).Take(10);
             var queryResult = await AsyncExecuter.ToListAsync(query);
@@ -262,8 +269,9 @@ namespace Quizlet_Fake.Songs
             var DTos = queryResult.Select(x =>
             {
                 var dto = ObjectMapper.Map<Song, SongDto>(x.song);
-                
+                dto.authorname = x.author.name;
                 dto.singername = x.singer.name;
+                dto.views = x.song.views;
                 return dto;
             }).ToList();
 
@@ -271,6 +279,42 @@ namespace Quizlet_Fake.Songs
             return new List<SongDto>(DTos);
         }
 
+       
 
+        public async Task<List<SongDto>> chart(int limitfrom)
+        {
+            await CheckGetListPolicyAsync();
+            /*
+            var query = from song in _repository
+                        join songsinger in _songsinger on song.Id equals songsinger.song_id
+                        join singer in _singer on songsinger.singer_id equals singer.Id 
+                        where singer.name.StartsWith(singerr)
+                        select new { song, singer };
+            */
+
+            var query = from singer in _singer
+
+                        join song in _repository on singer.Id equals song.singer_id
+                        join author in _author on song.author_id equals author.Id
+                        orderby song.views descending
+                        select new { song, singer, author }; 
+
+            query = query.Skip(limitfrom).Take(10);
+            query.OrderByDescending(c => c.song.views);
+            var queryResult = await AsyncExecuter.ToListAsync(query);
+
+
+            var DTos = queryResult.Select(x =>
+            {
+                var dto = ObjectMapper.Map<Song, SongDto>(x.song);
+                dto.authorname = x.author.name;
+                dto.singername = x.singer.name;
+                dto.views = x.song.views;
+                return dto;
+            }).ToList();
+
+
+            return new List<SongDto>(DTos);
+        }
     }
 }

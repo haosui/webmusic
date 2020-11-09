@@ -28,4 +28,5 @@ export interface SongDto extends AuditedEntityDto<string> {
   singerId: string;
   imagepath: string;
   songpath: string;
+  views: number;
 }
